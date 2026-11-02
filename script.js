@@ -1,0 +1,6 @@
+const toggle=document.querySelector('.toggle');const nav=document.querySelector('.navlinks');
+toggle.addEventListener('click',()=>{const open=nav.classList.toggle('open');toggle.setAttribute('aria-expanded',String(open));});
+document.querySelectorAll('.navlinks a').forEach(a=>a.addEventListener('click',()=>{nav.classList.remove('open');toggle.setAttribute('aria-expanded','false');}));
+document.getElementById('year').textContent=new Date().getFullYear();
+document.querySelectorAll('[data-course]').forEach(link=>link.addEventListener('click',()=>{const select=document.getElementById('topic');const wanted=link.dataset.course.toLowerCase();const option=[...select.options].find(o=>o.text.toLowerCase()===wanted);if(option)select.value=option.value;}));
+document.getElementById('contactForm').addEventListener('submit',e=>{e.preventDefault();const form=e.currentTarget;if(!form.reportValidity())return;const d=new FormData(form);const message=['Hello AZ Digital Marketing,','',`Name: ${d.get('name').trim()}`,`Email: ${d.get('email').trim()}`,`Interested in: ${d.get('topic')}`,'','Message:',d.get('message').trim()].join('\\n');const url='https://wa.me/923092805105?text='+encodeURIComponent(message);document.getElementById('status').textContent='WhatsApp is opening with your message. Please review it and press Send.';window.open(url,'_blank','noopener,noreferrer');});
